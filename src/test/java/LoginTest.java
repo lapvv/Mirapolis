@@ -72,8 +72,36 @@ public class LoginTest {
         alert.accept();
     }
 
-    //добавить проверку по восстановлению пароля
+    //вводим пробелы
     @Test(priority = 3)
+    public void loginTestEmpty(){
+        driver.get(System.getProperty("site.url"));
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.login(" ", " ");
+        Alert alert = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.alertIsPresent());
+        String text = alert.getText();
+        Assert.assertEquals(text, "Неверные данные для авторизации.");
+        alert.accept();
+    }
+
+    //ничего не вводим
+    @Test(priority = 4)
+    public void loginTestEmpty_2(){
+        driver.get(System.getProperty("site.url"));
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.login("", "");
+        Alert alert = (new WebDriverWait(driver, Duration.ofSeconds(10)))
+                .until(ExpectedConditions.alertIsPresent());
+        String text = alert.getText();
+        Assert.assertEquals(text, "Неверные данные для авторизации.");
+        alert.accept();
+    }
+
+    //добавить проверку по восстановлению пароля
+    @Test(priority = 5)
     public void passRecoveryTest(){
         driver.get(System.getProperty("site.url"));
         LoginPage loginPage = new LoginPage(driver);
@@ -83,7 +111,7 @@ public class LoginTest {
         passRecoveryPage.loginBox();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void logoClickTest(){
         driver.get(System.getProperty("site.url"));
         LoginPage loginPage = new LoginPage(driver);
