@@ -22,7 +22,7 @@ public class MainPage extends AbstractPage{
     }
 
     public void logout(){
-        WebElement userPanel = driver.findElement(By.xpath("//div[@class='drop_down_container guest-drop-down mira-user-info-widget-desktop']"));
+        WebElement userPanel = driver.findElement(By.xpath("//div[@name='avatar_control']/div"));
         userPanel.click();
         WebElement logout = driver.findElement(By.xpath("//div[@class='mira-user-info-logout']"));
         logout.click();

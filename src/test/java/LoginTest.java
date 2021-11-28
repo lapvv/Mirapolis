@@ -1,6 +1,7 @@
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,6 +16,7 @@ import java.time.Duration;
 public class LoginTest {
 
     private WebDriver driver;
+//    private WebDriver driver2;
 
     @BeforeClass
     public void setup() throws IOException {
@@ -24,11 +26,16 @@ public class LoginTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get(System.getProperty("site.url"));
+        /*driver2 = new FirefoxDriver();
+        driver2.manage().window().maximize();
+        driver2.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver2.get(System.getProperty("site.url"));*/
     }
 
     @AfterClass
     public void tearDown() {
         driver.quit();
+        //driver2.quit();
     }
 
     //smokeTest
@@ -118,4 +125,15 @@ public class LoginTest {
         loginPage.open();
         loginPage.logo();
     }
+
+    /*@Test (priority = 7)
+    public void smokeTestFirefox(){
+        LoginPage loginPage = new LoginPage(driver2);
+        loginPage.open();
+        loginPage.login();
+        MainPage mainPage = new MainPage(driver2);
+        mainPage.statusCheckIsVisible();
+        mainPage.logout();
+        loginPage.welcomeTextCheckIsVisible();
+    }*/
 }
